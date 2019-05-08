@@ -63,6 +63,10 @@ public class FramebufferObject {
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthID, 0);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    bind();
+    clear();
+    unbind();
   }
 
   /**

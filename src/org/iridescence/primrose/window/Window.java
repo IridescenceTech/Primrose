@@ -8,6 +8,7 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 import org.iridescence.primrose.graphics.utils.OGLReporter;
 import org.iridescence.primrose.input.*;
 import org.iridescence.primrose.utils.Logging;
+import org.joml.Vector2i;
 import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
@@ -503,6 +504,10 @@ public class Window {
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
   }
 
+
+  public Vector2i getResolution(){
+    return new Vector2i(width, height);
+  }
 
   public static Window windowObject;
 

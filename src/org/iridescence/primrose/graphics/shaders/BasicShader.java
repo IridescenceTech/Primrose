@@ -4,7 +4,7 @@ package org.iridescence.primrose.graphics.shaders;
  * Unlit Shader with textures
  */
 public class BasicShader extends Shader {
-  private static final String vs = "#version 330\n"
+  public static final String vs = "#version 330\n"
       + "\n"
       + "// A basic Vertex Shader\n"
       + "\n"
@@ -23,7 +23,7 @@ public class BasicShader extends Shader {
       + "\n"
       + "    texcoord = inTexcoord;\n"
       + "}";
-  private static final String fs = "#version 330\n"
+  public static final String fs = "#version 330\n"
       + "\n"
       + "// A basic Fragment Shader\n"
       + "\n"

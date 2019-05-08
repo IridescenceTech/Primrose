@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact name="Primrose:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Primrose_jar</output-path>
+    <root id="root">
+      <element id="archive" name="Primrose.jar">
+        <element id="module-output" name="Primrose" />
+      </element>
+      <element id="library" level="project" name="native" />
+      <element id="library" level="project" name="lwjgl" />
+    </root>
+  </artifact>
+</component>

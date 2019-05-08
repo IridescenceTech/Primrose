@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: joml-1.9.14.jar lwjgl-assimp.jar lwjgl-glfw.jar lwjgl-open
+ al.jar lwjgl-opengl.jar lwjgl-stb.jar lwjgl-vulkan.jar lwjgl.jar native/
+Main-Class: org.iridescence.primrose.Test
+

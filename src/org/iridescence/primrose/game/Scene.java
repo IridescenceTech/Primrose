@@ -6,6 +6,7 @@ import org.iridescence.primrose.graphics.lights.*;
 import org.iridescence.primrose.graphics.shaders.PhongShader;
 import org.iridescence.primrose.utils.Logging;
 import org.joml.Vector3f;
+import sun.rmi.runtime.Log;
 
 import java.awt.*;
 import java.util.ArrayDeque;
@@ -122,8 +123,7 @@ public class Scene {
                     PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].intensity", spo.intensity);
                     PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].linear", spo.linearTerm);
                     PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].quadratic", spo.quadraticTerm);
-                    PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.cutOff);
-                    PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].outerCutOff", spo.mCutOff);
+                    PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.mCutOff);
 
                     spoCount++;
                     break;

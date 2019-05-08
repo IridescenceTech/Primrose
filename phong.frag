@@ -24,10 +24,7 @@ struct SpotLight{
     vec3 direction;
     vec3 color;
     float intensity;
-
     float cutOff;
-    float outerCutOff;
-
     float linear;
     float quadratic;
 };
@@ -140,29 +137,25 @@ vec3 CalcPoint(PointLight point){
 vec3 CalcSpot(SpotLight spot){
     if(spot.intensity > 0 && spot.cutOff > 0){
         vec3 lightDir = normalize(spot.position - fragPos);
-
-        float diff = max(dot(normal, lightDir), 0.0);
-
-
-        vec3 specularFactor = vec3(0.0f);
-        if(dot(normalize(normal), lightDir) >= 0.0f){
-            vec3 reflectDir = reflect(-lightDir, normalize(normal));
-            float spec = pow(max(dot(normalize(cameraPosition - fragPos), reflectDir), 0), pow(2, material.shininess * 10));
-            specularFactor = material.specularIntensity * spec * spot.color * spot.intensity * specMap.rgb;
-        }
-
+        // diffuse shading
+        float diff = max(dot(normalize(normal), lightDir), 0.0);
+        // specular shading
+        vec3 reflectDir = reflect(-lightDir, normalize(normal));
+        float spec = pow(max(dot(normalize(cameraPosition - fragPos), reflectDir), 0.0), pow(2,material.shininess * 10.0f));
+        // attenuation
         float distance = length(spot.position - fragPos);
-        float attenuation = 1.0 / (1 + spot.linear * distance + spot.quadratic * (distance * distance));
-
+        float attenuation = 1.0 / (1.0f + spot.linear * distance + spot.quadratic * (distance * distance));
+        // spotlight intensity
         float theta = dot(lightDir, normalize(-spot.direction));
-        float epsilon = spot.cutOff - spot.outerCutOff;
-        float intensity = clamp((theta - spot.outerCutOff) / epsilon, 0.0, 1.0);
-
-        vec3 diffuse = spot.intensity * spot.color * diff * diffuseMap.rgb;
+        float epsilon = spot.cutOff;
+        float intensity = clamp((theta) / epsilon, 0.0, 1.0);
+        // combine results
+        vec3 diffuse = spot.color * spot.intensity * diff * diffuseMap.rgb;
+        vec3 specular = spot.color * spot.intensity * spec * specMap.rgb;
 
         diffuse *= attenuation * intensity;
-        specularFactor *= attenuation * intensity;
-        return (diffuse + specularFactor);
+        specular *= attenuation * intensity;
+        return (diffuse + specular);
     }else {
         return vec3(0.0f);
     }

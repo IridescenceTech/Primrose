@@ -6,9 +6,7 @@ import org.iridescence.primrose.graphics.lights.*;
 import org.iridescence.primrose.graphics.shaders.PhongShader;
 import org.iridescence.primrose.utils.Logging;
 import org.joml.Vector3f;
-import sun.rmi.runtime.Log;
 
-import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
@@ -26,7 +24,7 @@ public class Scene {
         meshes = new ArrayDeque<>();
         lights = new ArrayDeque<>();
 
-        ambientColor = new Vector3f(0.1f);
+        ambientColor = new Vector3f(1.0f);
         ambientIntensity = 0.1f;
 
         directionalCount = 0;

@@ -1,6 +1,5 @@
 package org.iridescence.primrose.utils;
 
-
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
@@ -12,9 +11,7 @@ import java.util.logging.LogRecord;
 public class LoggerFormatter extends Formatter {
 
   public String format(LogRecord record) {
-    return "[" + record.getLevel() + "]: " +
-        formatMessage(record) +
-        "\n";
+    return "[" + record.getLevel() + "]: " + formatMessage(record) + "\n";
   }
 
   public String getHead(Handler h) {

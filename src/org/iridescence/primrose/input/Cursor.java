@@ -1,22 +1,11 @@
 package org.iridescence.primrose.input;
 
-
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 
-/**
- * A Handler For The Cursor Position on the window screen.
- */
+/** A Handler For The Cursor Position on the window screen. */
 public class Cursor extends GLFWCursorPosCallback {
 
   private static double x, y;
-
-  /**
-   * GLFW Callback - See GLFW Documentation for parameter data.
-   */
-  public void invoke(long window, double xpos, double ypos) {
-    x = xpos;
-    y = ypos;
-  }
 
   /**
    * Retrieves the x position of the mouse cursor.
@@ -34,5 +23,11 @@ public class Cursor extends GLFWCursorPosCallback {
    */
   public static double getY() {
     return y;
+  }
+
+  /** GLFW Callback - See GLFW Documentation for parameter data. */
+  public void invoke(long window, double xpos, double ypos) {
+    x = xpos;
+    y = ypos;
   }
 }

@@ -1,33 +1,31 @@
 package org.iridescence.primrose.graphics.shaders;
 
-/**
- * Phong Shader, lit with specular.
- */
+/** Phong Shader, lit with specular. */
 public class PhongShader extends Shader {
 
-
-    public static final String vs = "#version 330\n" +
-            "\n" +
-            "layout(location = 0) in vec3 inPosition;\n" +
-            "layout(location = 1) in vec2 inTexcoord;\n" +
-            "layout(location = 2) in vec3 inNormal;\n" +
-            "\n" +
-            "out vec2 texcoord;\n" +
-            "out vec3 normal;\n" +
-            "out vec3 fragPos;\n" +
-            "\n" +
-            "\n" +
-            "uniform mat4 projViewMatrix;\n" +
-            "uniform mat4 modelMatrix;\n" +
-            "\n" +
-            "void main()\n" +
-            "{\n" +
-            "    fragPos = vec3(modelMatrix * vec4(inPosition, 1.0));\n" +
-            "    normal = mat3(transpose(inverse(modelMatrix))) * inNormal;\n" +
-            "    gl_Position = projViewMatrix * vec4(fragPos, 1.0);\n" +
-            "\n" +
-            "    texcoord = inTexcoord;\n" +
-            "}";
+  public static final String vs =
+      "#version 330\n"
+          + "\n"
+          + "layout(location = 0) in vec3 inPosition;\n"
+          + "layout(location = 1) in vec2 inTexcoord;\n"
+          + "layout(location = 2) in vec3 inNormal;\n"
+          + "\n"
+          + "out vec2 texcoord;\n"
+          + "out vec3 normal;\n"
+          + "out vec3 fragPos;\n"
+          + "\n"
+          + "\n"
+          + "uniform mat4 projViewMatrix;\n"
+          + "uniform mat4 modelMatrix;\n"
+          + "\n"
+          + "void main()\n"
+          + "{\n"
+          + "    fragPos = vec3(modelMatrix * vec4(inPosition, 1.0));\n"
+          + "    normal = mat3(transpose(inverse(modelMatrix))) * inNormal;\n"
+          + "    gl_Position = projViewMatrix * vec4(fragPos, 1.0);\n"
+          + "\n"
+          + "    texcoord = inTexcoord;\n"
+          + "}";
   public static final String fs =
       "#version 330\n"
           + "\n"
@@ -191,13 +189,10 @@ public class PhongShader extends Shader {
           + "        return vec3(0.0f);\n"
           + "    }\n"
           + "}";
+  /** A static instance of the shader. */
+  public static final PhongShader shader = new PhongShader();
 
-    public PhongShader(){
-        super( vs, fs ,false);
-    }
-
-    /**
-     * A static instance of the shader.
-     */
-    public final static PhongShader shader = new PhongShader();
+  public PhongShader() {
+    super(vs, fs, false);
+  }
 }

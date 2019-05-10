@@ -2,20 +2,10 @@ package org.iridescence.primrose.input;
 
 import org.lwjgl.glfw.GLFWScrollCallback;
 
-/**
- * Handler for Mouse Scrolling
- */
+/** Handler for Mouse Scrolling */
 public class Scroll extends GLFWScrollCallback {
 
   private static double xoff, yoff;
-
-  /**
-   * GLFW Callback - See GLFW Documentation for parameter data.
-   */
-  public void invoke(long window, double xoffset, double yoffset) {
-    xoff = xoffset;
-    yoff = yoffset;
-  }
 
   /**
    * Retrieves the X Offset of the Scroll Wheel.
@@ -33,5 +23,11 @@ public class Scroll extends GLFWScrollCallback {
    */
   public static double getYoff() {
     return yoff;
+  }
+
+  /** GLFW Callback - See GLFW Documentation for parameter data. */
+  public void invoke(long window, double xoffset, double yoffset) {
+    xoff = xoffset;
+    yoff = yoffset;
   }
 }

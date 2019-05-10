@@ -11,7 +11,7 @@ public class Logging {
   private static Handler fh;
   private static Handler ch;
 
-  public static void initializeLogger(){
+  public static void initializeLogger() {
     logger.setUseParentHandlers(false);
 
     try {
@@ -27,7 +27,7 @@ public class Logging {
     logger.addHandler(ch);
   }
 
-  public static void cleanupLogger(){
+  public static void cleanupLogger() {
     logger.info("Exiting Application!");
     fh.close();
     ch.close();

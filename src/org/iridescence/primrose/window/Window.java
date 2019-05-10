@@ -1,12 +1,68 @@
 package org.iridescence.primrose.window;
 
-import static org.iridescence.primrose.graphics.utils.OGLUtils.*;
+import static org.iridescence.primrose.graphics.utils.OGLUtils.oglClear;
+import static org.iridescence.primrose.graphics.utils.OGLUtils.oglSetClearColorFloat;
+import static org.iridescence.primrose.graphics.utils.OGLUtils.oglSetClearColorRGB;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
-import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.GLFW_BLUE_BITS;
+import static org.lwjgl.glfw.GLFW.GLFW_CLIENT_API;
+import static org.lwjgl.glfw.GLFW.GLFW_CONTEXT_VERSION_MAJOR;
+import static org.lwjgl.glfw.GLFW.GLFW_CONTEXT_VERSION_MINOR;
+import static org.lwjgl.glfw.GLFW.GLFW_CURSOR;
+import static org.lwjgl.glfw.GLFW.GLFW_CURSOR_DISABLED;
+import static org.lwjgl.glfw.GLFW.GLFW_CURSOR_NORMAL;
+import static org.lwjgl.glfw.GLFW.GLFW_FALSE;
+import static org.lwjgl.glfw.GLFW.GLFW_GREEN_BITS;
+import static org.lwjgl.glfw.GLFW.GLFW_NO_API;
+import static org.lwjgl.glfw.GLFW.GLFW_OPENGL_API;
+import static org.lwjgl.glfw.GLFW.GLFW_OPENGL_CORE_PROFILE;
+import static org.lwjgl.glfw.GLFW.GLFW_OPENGL_FORWARD_COMPAT;
+import static org.lwjgl.glfw.GLFW.GLFW_OPENGL_PROFILE;
+import static org.lwjgl.glfw.GLFW.GLFW_RED_BITS;
+import static org.lwjgl.glfw.GLFW.GLFW_REFRESH_RATE;
+import static org.lwjgl.glfw.GLFW.GLFW_SRGB_CAPABLE;
+import static org.lwjgl.glfw.GLFW.GLFW_TRUE;
+import static org.lwjgl.glfw.GLFW.GLFW_VERSION_MAJOR;
+import static org.lwjgl.glfw.GLFW.GLFW_VERSION_MINOR;
+import static org.lwjgl.glfw.GLFW.GLFW_VERSION_REVISION;
+import static org.lwjgl.glfw.GLFW.GLFW_VISIBLE;
+import static org.lwjgl.glfw.GLFW.glfwCreateWindow;
+import static org.lwjgl.glfw.GLFW.glfwDestroyWindow;
+import static org.lwjgl.glfw.GLFW.glfwGetClipboardString;
+import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
+import static org.lwjgl.glfw.GLFW.glfwGetVideoMode;
+import static org.lwjgl.glfw.GLFW.glfwHideWindow;
+import static org.lwjgl.glfw.GLFW.glfwIconifyWindow;
+import static org.lwjgl.glfw.GLFW.glfwInit;
+import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
+import static org.lwjgl.glfw.GLFW.glfwPollEvents;
+import static org.lwjgl.glfw.GLFW.glfwRequestWindowAttention;
+import static org.lwjgl.glfw.GLFW.glfwRestoreWindow;
+import static org.lwjgl.glfw.GLFW.glfwSetClipboardString;
+import static org.lwjgl.glfw.GLFW.glfwSetCursorPosCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetFramebufferSizeCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetInputMode;
+import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetScrollCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowIcon;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowMonitor;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowPos;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowSize;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowTitle;
+import static org.lwjgl.glfw.GLFW.glfwShowWindow;
+import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
+import static org.lwjgl.glfw.GLFW.glfwSwapInterval;
+import static org.lwjgl.glfw.GLFW.glfwTerminate;
+import static org.lwjgl.glfw.GLFW.glfwWindowHint;
+import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 import org.iridescence.primrose.graphics.utils.OGLReporter;
-import org.iridescence.primrose.input.*;
+import org.iridescence.primrose.input.Cursor;
+import org.iridescence.primrose.input.Keyboard;
+import org.iridescence.primrose.input.Mouse;
+import org.iridescence.primrose.input.Scroll;
 import org.iridescence.primrose.utils.Logging;
 import org.joml.Vector2i;
 import org.lwjgl.glfw.GLFWImage;
@@ -16,43 +72,31 @@ import org.lwjgl.opengl.GL;
 /**
  * The default window manager and controller object. Creates a window and allows its use for OpenGL
  * drawing. Also central hub for input processing and window event handling. See the Input Device
- * Handler Classes to retrieve data obtained by this class. These can be found in the input
- * package.
+ * Handler Classes to retrieve data obtained by this class. These can be found in the input package.
  *
- * No Joystick/Gamepad support is provided by default, but external libraries and software can be
+ * <p>No Joystick/Gamepad support is provided by default, but external libraries and software can be
  * used.
  */
 public class Window {
 
-    /*
-    //////////////////////
-    / VARIABLES AND DATA /
-    //////////////////////
-    */
+  /*
+  //////////////////////
+  / VARIABLES AND DATA /
+  //////////////////////
+  */
 
+  public static GraphicsType graphicsAPI = GraphicsType.GRAPHICS_TYPE_OPENGL_45;
+  public static Window windowObject;
   private int width, height;
   private String title;
   private boolean vsync, fullscreen;
+
+  /*
+  ////////////////////
+  / WINDOW FUNCTIONS /
+  ////////////////////
+  */
   private long window;
-
-  public static GraphicsType graphicsAPI = GraphicsType.GRAPHICS_TYPE_OPENGL_45;
-
-    /*
-    ////////////////////
-    / WINDOW FUNCTIONS /
-    ////////////////////
-    */
-
-  /**
-   * Sets up global window object
-   * @param w - Width of the window
-   * @param h - Height of the window
-   * @param t - Widow title
-   * @param f - Fullscreen
-   */
-    public static void setupWindow(int w, int h, String t, boolean f){
-      windowObject = new Window(w, h, t, f);
-    }
 
   /**
    * Creates a new window object. Only one window should be created for an application. Multiple
@@ -70,10 +114,22 @@ public class Window {
     title = Title;
     fullscreen = Fullscreen;
 
-    vsync = false; //By default VSync not enabled to test engine performance.
+    vsync = false; // By default VSync not enabled to test engine performance.
 
     Logging.logger.info("Initialized New Window Object.");
     init();
+  }
+
+  /**
+   * Sets up global window object
+   *
+   * @param w - Width of the window
+   * @param h - Height of the window
+   * @param t - Widow title
+   * @param f - Fullscreen
+   */
+  public static void setupWindow(int w, int h, String t, boolean f) {
+    windowObject = new Window(w, h, t, f);
   }
 
   private boolean createWindow() {
@@ -81,6 +137,7 @@ public class Window {
 
     if (fullscreen) {
       GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+      assert vidmode != null;
       glfwWindowHint(GLFW_RED_BITS, vidmode.redBits());
       glfwWindowHint(GLFW_GREEN_BITS, vidmode.greenBits());
       glfwWindowHint(GLFW_BLUE_BITS, vidmode.blueBits());
@@ -101,8 +158,6 @@ public class Window {
       Logging.logger.severe("GLFW Window Could Not Be Created!");
       return false;
     }
-
-
   }
 
   /**
@@ -121,12 +176,18 @@ public class Window {
       throw new Error("GLFW Library Not Initialized! Check window.Logging.logger!");
     }
 
-    Logging.logger.info("GLFW Version " + GLFW_VERSION_MAJOR + "." + GLFW_VERSION_MINOR + "."
-        + GLFW_VERSION_REVISION);
+    Logging.logger.info(
+        "GLFW Version "
+            + GLFW_VERSION_MAJOR
+            + "."
+            + GLFW_VERSION_MINOR
+            + "."
+            + GLFW_VERSION_REVISION);
     Logging.logger.info("Configuring GLFW with default settings.");
 
-    //OPENGL MODE
-    if (graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_45 || graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_40
+    // OPENGL MODE
+    if (graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_45
+        || graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_40
         || graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_33) {
       Logging.logger.info("GLFW Client API set to OpenGL Mode!");
       glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
@@ -134,7 +195,7 @@ public class Window {
       glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
       Logging.logger.info("GLFW OpenGL Forward Compatibility Mode set to true.");
       glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, 1);
-    }else{ //VULKAN MODE
+    } else { // VULKAN MODE
       Logging.logger.info("GLFW Client API set to Vulkan Mode!");
       glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     }
@@ -146,43 +207,44 @@ public class Window {
     Logging.logger.info("GLFW Requesting SRGB Capable Window.");
     glfwWindowHint(GLFW_SRGB_CAPABLE, GLFW_TRUE); // Hopefully, we can report this in GLInitTests
 
-    if(graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_45){
+    if (graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_45) {
       Logging.logger.info("GLFW OpenGL API default set to 4.5.");
       glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
       glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-    }else if(graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_33){
+    } else if (graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_33) {
       Logging.logger.info("GLFW OpenGL API default set to 3.3.");
       glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
       glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    }else if(graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_40){
+    } else if (graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_40) {
       Logging.logger.info("GLFW OpenGL API default set to 4.0.");
       glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
       glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     }
-    //VULKAN DOES NOT NEED THIS!
+    // VULKAN DOES NOT NEED THIS!
 
-    //No MSAA support... we will most likely use a deferred pipeline, where MSAA is not supported anyways
+    // No MSAA support... we will most likely use a deferred pipeline, where MSAA is not supported
+    // anyways
     while (!createWindow()) {
-      if(graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_45){
+      if (graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_45) {
         Logging.logger.severe("Retrying window creation with OpenGL 4.0 instead of OpenGL 4.5!");
         Logging.logger.severe("OpenGL set to version 4.5.");
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
         graphicsAPI = GraphicsType.GRAPHICS_TYPE_OPENGL_40;
-      }else if(graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_40){
+      } else if (graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_40) {
         Logging.logger.severe("Retrying window creation with OpenGL 3.3 instead of OpenGL 4.0!");
         Logging.logger.severe("OpenGL set to version 4.5.");
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         graphicsAPI = GraphicsType.GRAPHICS_TYPE_OPENGL_33;
-      }else if(graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_33){
-        Logging.logger.severe("FATAL: Could not create a window. Please check your drivers and graphics configuration.");
+      } else if (graphicsAPI == GraphicsType.GRAPHICS_TYPE_OPENGL_33) {
+        Logging.logger.severe(
+            "FATAL: Could not create a window. Please check your drivers and graphics configuration.");
         Logging.logger.severe("FATAL: OpenGL 3.3+ may not be supported!");
         throw new Error("Window Could Not Be Created!");
       }
     }
     setVsync(vsync);
-
 
     Logging.logger.info("GLFW Creating OpenGL Context!");
     glfwMakeContextCurrent(window);
@@ -211,8 +273,8 @@ public class Window {
    * Destroys current window and terminates windowing library. Reading data from Callbacks/Handlers
    * of related input and windowing changes may result in a Null-Pointer Exception Error. Please use
    * these services before window destruction. Likewise, the OpenGL context will be invalidated and
-   * any OpenGL calls taken after this point are considered undefined. Logging.loggerging data for this window
-   * will be written to the disk and saved, and the file lock removed.
+   * any OpenGL calls taken after this point are considered undefined. Logging.loggerging data for
+   * this window will be written to the disk and saved, and the file lock removed.
    */
   public void cleanup() {
 
@@ -225,8 +287,7 @@ public class Window {
   }
 
   /**
-   *
-   *  This function polls for events which have occurred such as input events, window event requests,
+   * This function polls for events which have occurred such as input events, window event requests,
    * and system events. Update should also trigger callbacks for Input and Windowing changes, though
    * they may be asynchronous.
    */
@@ -250,11 +311,11 @@ public class Window {
     OGLReporter.searchErrors();
   }
 
-  public void Clear(){
+  public void Clear() {
     oglClear();
   }
 
-  public void ClearColorFloat(float r, float g, float b, float a){
+  public void ClearColorFloat(float r, float g, float b, float a) {
     oglSetClearColorFloat(r, g, b, a);
   }
 
@@ -262,7 +323,11 @@ public class Window {
     oglSetClearColorRGB(r, g, b, a);
   }
 
-
+  /*
+  /////////////////////
+  / UTILITY FUNCTIONS /
+  /////////////////////
+  */
 
   /**
    * This function checks whether or not the window has a close request scheduled or close event
@@ -273,14 +338,6 @@ public class Window {
   public boolean shouldClose() {
     return glfwWindowShouldClose(window);
   }
-
-
-    /*
-    /////////////////////
-    / UTILITY FUNCTIONS /
-    /////////////////////
-    */
-
 
   /**
    * Retrieves the window's width.
@@ -388,25 +445,23 @@ public class Window {
     GLFWVidMode vid = glfwGetVideoMode(glfwGetPrimaryMonitor());
     if (!fullscreen) {
       Logging.logger.info("Window switched from border-less full screen to windowed mode.");
-      glfwSetWindowMonitor(window, NULL,
-          0, 0,
-          this.width, this.height, 0);
+      glfwSetWindowMonitor(window, NULL, 0, 0, this.width, this.height, 0);
 
       glfwSetWindowSize(window, this.width, this.height);
       glfwHideWindow(window);
-      glfwSetWindowPos(window, vid.width() / 2 - this.getWidth() / 2,
-          vid.height() / 2 - this.getHeight() / 2);
+      assert vid != null;
+      glfwSetWindowPos(
+          window, vid.width() / 2 - this.getWidth() / 2, vid.height() / 2 - this.getHeight() / 2);
       glfwShowWindow(window);
     } else {
       Logging.logger.info("Window switched from windowed mode to border-less full screen.");
-      glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, vid.width(), vid.height(),
-          vid.refreshRate());
+      assert vid != null;
+      glfwSetWindowMonitor(
+          window, glfwGetPrimaryMonitor(), 0, 0, vid.width(), vid.height(), vid.refreshRate());
     }
   }
 
-  /**
-   * Changes window from fullscreen to window and vice versa depending on the current state.
-   */
+  /** Changes window from fullscreen to window and vice versa depending on the current state. */
   public void toggleFullscreen() {
     setFullscreen(!this.fullscreen);
   }
@@ -438,37 +493,27 @@ public class Window {
     glfwSetClipboardString(window, data);
   }
 
-  /**
-   * Shows the GLFW Window on Screen
-   */
+  /** Shows the GLFW Window on Screen */
   public void showWindow() {
     glfwShowWindow(window);
   }
 
-  /**
-   * Hides the GLFW Window on Screen
-   */
+  /** Hides the GLFW Window on Screen */
   public void hideWindow() {
     glfwHideWindow(window);
   }
 
-  /**
-   * Requests the OS to alert about the window.
-   */
+  /** Requests the OS to alert about the window. */
   public void windowAlert() {
     glfwRequestWindowAttention(window);
   }
 
-  /**
-   * Iconifies the window on the Screen.
-   */
+  /** Iconifies the window on the Screen. */
   public void iconifyWindow() {
     glfwIconifyWindow(window);
   }
 
-  /**
-   * Restores the window back to its default state.
-   */
+  /** Restores the window back to its default state. */
   public void restoreWindow() {
     glfwRestoreWindow(window);
   }
@@ -490,26 +535,17 @@ public class Window {
     glfwSetWindowIcon(window, imagebf);
   }
 
-  /**
-   * Disables cursor, but still allows mouse and positional input.
-   */
+  /** Disables cursor, but still allows mouse and positional input. */
   public void disableCursor() {
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
   }
 
-  /**
-   * Enables cursor to be displayed.
-   */
+  /** Enables cursor to be displayed. */
   public void enableCursor() {
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
   }
 
-
-  public Vector2i getResolution(){
+  public Vector2i getResolution() {
     return new Vector2i(width, height);
   }
-
-  public static Window windowObject;
-
 }
-

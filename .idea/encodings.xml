@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/lib/._assimp_license.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/lib/._build.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/lib/._dyncall_license.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/lib/._glfw_license.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/lib/._joml_license.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/lib/._khronos_license.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/lib/._openal_soft_license.txt" charset="windows-1252" />
+  </component>
+</project>

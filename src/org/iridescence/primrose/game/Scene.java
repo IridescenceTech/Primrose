@@ -8,6 +8,8 @@ import org.iridescence.primrose.graphics.lights.Light;
 import org.iridescence.primrose.graphics.lights.LightType;
 import org.iridescence.primrose.graphics.lights.PointLight;
 import org.iridescence.primrose.graphics.lights.SpotLight;
+import org.iridescence.primrose.graphics.shaders.BasicShader;
+import org.iridescence.primrose.graphics.shaders.LambertShader;
 import org.iridescence.primrose.graphics.shaders.PhongShader;
 import org.iridescence.primrose.utils.Logging;
 import org.joml.Vector3f;
@@ -20,6 +22,8 @@ public class Scene {
   final float ambientIntensity;
   int directionalCount, pointCount, spotCount;
 
+  boolean[] materialsUsed;
+
   public Scene() {
     meshes = new ArrayDeque<>();
     lights = new ArrayDeque<>();
@@ -30,13 +34,24 @@ public class Scene {
     directionalCount = 0;
     pointCount = 0;
     spotCount = 0;
+
+    materialsUsed = new boolean[6];
+
+    for(int i = 0; i < 6; i++){
+      materialsUsed[i] = false;
+    }
   }
 
   public void add(GameObject object) {
     switch (object.type) {
       case OBJECT_TYPE_MESH:
         meshes.push(object);
+
+        //Check materials we need to actually update!
+        materialsUsed[((Mesh) object).material.type.getValue()] = true;
+
         break;
+
       case OBJECT_TYPE_LIGHT:
         Light light = (Light) object;
         if (light.type == LightType.LIGHT_TYPE_DIRECTIONAL) {
@@ -75,9 +90,19 @@ public class Scene {
   private void updateLighting() {
     // Updates light components for each shader.
 
-    PhongShader.shader.bind();
-    PhongShader.shader.setUniformVec3f("ambient.color", ambientColor);
-    PhongShader.shader.setUniformFloat("ambient.intensity", ambientIntensity);
+    if(materialsUsed[1]){
+      LambertShader.shader.bind();
+      LambertShader.shader.setUniformVec3f("ambient.color", ambientColor);
+      LambertShader.shader.setUniformFloat("ambient.intensity", ambientIntensity);
+    }
+
+    if(materialsUsed[2]){
+      PhongShader.shader.bind();
+      PhongShader.shader.setUniformVec3f("ambient.color", ambientColor);
+      PhongShader.shader.setUniformFloat("ambient.intensity", ambientIntensity);
+    }
+
+
 
     Iterator<GameObject> iter = lights.iterator();
     int dirCount = 0;
@@ -91,11 +116,27 @@ public class Scene {
       switch (temp.type) {
         case LIGHT_TYPE_DIRECTIONAL:
           DirectionalLight dir = (DirectionalLight) temp;
-          PhongShader.shader.setUniformVec3f("directional[" + dirCount + "].color", dir.color);
-          PhongShader.shader.setUniformFloat(
-              "directional[" + dirCount + "].intensity", dir.intensity);
-          PhongShader.shader.setUniformVec3f(
-              "directional[" + dirCount + "].direction", dir.direction);
+
+          if(materialsUsed[1]){
+            LambertShader.shader.bind();
+
+            LambertShader.shader.setUniformVec3f("directional[" + dirCount + "].color", dir.color);
+            LambertShader.shader.setUniformFloat(
+                "directional[" + dirCount + "].intensity", dir.intensity);
+            LambertShader.shader.setUniformVec3f(
+                "directional[" + dirCount + "].direction", dir.direction);
+          }
+
+          if(materialsUsed[2]){
+            PhongShader.shader.bind();
+
+            PhongShader.shader.setUniformVec3f("directional[" + dirCount + "].color", dir.color);
+            PhongShader.shader.setUniformFloat(
+                "directional[" + dirCount + "].intensity", dir.intensity);
+            PhongShader.shader.setUniformVec3f(
+                "directional[" + dirCount + "].direction", dir.direction);
+          }
+
 
           dirCount++;
           break;
@@ -103,15 +144,34 @@ public class Scene {
         case LIGHT_TYPE_POINTLIGHT:
           PointLight poi = (PointLight) temp;
 
-          PhongShader.shader.setUniformVec3f(
-              "pointLights[" + poiCount + "].position", poi.transform.position);
-          PhongShader.shader.setUniformVec3f("pointLights[" + poiCount + "].color", poi.color);
-          PhongShader.shader.setUniformFloat(
-              "pointLights[" + poiCount + "].intensity", poi.intensity);
-          PhongShader.shader.setUniformFloat(
-              "pointLights[" + poiCount + "].linear", poi.linearTerm);
-          PhongShader.shader.setUniformFloat(
-              "pointLights[" + poiCount + "].quadratic", poi.quadraticTerm);
+          if(materialsUsed[1]){
+            LambertShader.shader.bind();
+
+            LambertShader.shader.setUniformVec3f(
+                "pointLights[" + poiCount + "].position", poi.transform.position);
+            LambertShader.shader.setUniformVec3f("pointLights[" + poiCount + "].color", poi.color);
+            LambertShader.shader.setUniformFloat(
+                "pointLights[" + poiCount + "].intensity", poi.intensity);
+            LambertShader.shader.setUniformFloat(
+                "pointLights[" + poiCount + "].linear", poi.linearTerm);
+            LambertShader.shader.setUniformFloat(
+                "pointLights[" + poiCount + "].quadratic", poi.quadraticTerm);
+          }
+
+          if(materialsUsed[2]){
+            PhongShader.shader.bind();
+            PhongShader.shader.setUniformVec3f(
+                "pointLights[" + poiCount + "].position", poi.transform.position);
+            PhongShader.shader.setUniformVec3f("pointLights[" + poiCount + "].color", poi.color);
+            PhongShader.shader.setUniformFloat(
+                "pointLights[" + poiCount + "].intensity", poi.intensity);
+            PhongShader.shader.setUniformFloat(
+                "pointLights[" + poiCount + "].linear", poi.linearTerm);
+            PhongShader.shader.setUniformFloat(
+                "pointLights[" + poiCount + "].quadratic", poi.quadraticTerm);
+          }
+
+
 
           poiCount++;
           break;
@@ -119,17 +179,39 @@ public class Scene {
         case LIGHT_TYPE_SPOTLIGHT:
           SpotLight spo = (SpotLight) temp;
 
-          PhongShader.shader.setUniformVec3f(
-              "spotLights[" + spoCount + "].position", spo.transform.position);
-          PhongShader.shader.setUniformVec3f(
-              "spotLights[" + spoCount + "].direction", spo.direction);
-          PhongShader.shader.setUniformVec3f("spotLights[" + spoCount + "].color", spo.color);
-          PhongShader.shader.setUniformFloat(
-              "spotLights[" + spoCount + "].intensity", spo.intensity);
-          PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].linear", spo.linearTerm);
-          PhongShader.shader.setUniformFloat(
-              "spotLights[" + spoCount + "].quadratic", spo.quadraticTerm);
-          PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.mCutOff);
+          if(materialsUsed[1]){
+            LambertShader.shader.bind();
+
+            LambertShader.shader.setUniformVec3f(
+                "spotLights[" + spoCount + "].position", spo.transform.position);
+            LambertShader.shader.setUniformVec3f(
+                "spotLights[" + spoCount + "].direction", spo.direction);
+            LambertShader.shader.setUniformVec3f("spotLights[" + spoCount + "].color", spo.color);
+            LambertShader.shader.setUniformFloat(
+                "spotLights[" + spoCount + "].intensity", spo.intensity);
+            LambertShader.shader.setUniformFloat("spotLights[" + spoCount + "].linear", spo.linearTerm);
+            LambertShader.shader.setUniformFloat(
+                "spotLights[" + spoCount + "].quadratic", spo.quadraticTerm);
+            LambertShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.mCutOff);
+          }
+
+          if(materialsUsed[2]){
+            PhongShader.shader.bind();
+
+            PhongShader.shader.setUniformVec3f(
+                "spotLights[" + spoCount + "].position", spo.transform.position);
+            PhongShader.shader.setUniformVec3f(
+                "spotLights[" + spoCount + "].direction", spo.direction);
+            PhongShader.shader.setUniformVec3f("spotLights[" + spoCount + "].color", spo.color);
+            PhongShader.shader.setUniformFloat(
+                "spotLights[" + spoCount + "].intensity", spo.intensity);
+            PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].linear", spo.linearTerm);
+            PhongShader.shader.setUniformFloat(
+                "spotLights[" + spoCount + "].quadratic", spo.quadraticTerm);
+            PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.mCutOff);
+          }
+
+
 
           spoCount++;
           break;

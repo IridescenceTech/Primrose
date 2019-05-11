@@ -9,6 +9,7 @@ import org.iridescence.primrose.graphics.Mesh;
 import org.iridescence.primrose.graphics.controller.Freecam;
 import org.iridescence.primrose.graphics.geometry.GeometryBuilderUtil;
 import org.iridescence.primrose.graphics.lights.DirectionalLight;
+import org.iridescence.primrose.graphics.materials.MaterialLambert;
 import org.iridescence.primrose.graphics.materials.MaterialPhong;
 import org.iridescence.primrose.graphics.texturing.Texture;
 import org.iridescence.primrose.graphics.utils.OGLUtils;
@@ -35,19 +36,15 @@ public class Test {
 
     scene.add(dirLight);
 
-    MaterialPhong materialPhong =
-        new MaterialPhong(
+    MaterialLambert materialLambert =
+        new MaterialLambert(
             new Texture(
-                "./assets/container.png", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR),
-            new Texture(
-                "./assets/container-s.png", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR),
-            1.0f,
-            0.7f);
-    Mesh m = new Mesh(GeometryBuilderUtil.createCube(1), materialPhong);
+                "./assets/container.png", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR));
+    Mesh m = new Mesh(GeometryBuilderUtil.createCube(1), materialLambert);
     scene.add(m);
 
     for (int i = 0; i < 100; i++) {
-      Mesh cubes = new Mesh(GeometryBuilderUtil.createCube(1), materialPhong);
+      Mesh cubes = new Mesh(GeometryBuilderUtil.createCube(1), materialLambert);
       cubes.transform.position =
           new Vector3f(
               (float) Math.random() * 50 - 25,

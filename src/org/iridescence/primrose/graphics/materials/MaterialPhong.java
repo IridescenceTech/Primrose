@@ -16,7 +16,7 @@ public class MaterialPhong extends Material {
   protected final Texture specMap;
 
   public MaterialPhong(Texture diffuse, Texture specular, float specIntensity, float shiny) {
-    super(diffuse);
+    super(diffuse, MaterialType.MATERIAL_TYPE_PHONG);
     specMap = specular;
     specularIntensity = specIntensity;
     shininess = shiny;

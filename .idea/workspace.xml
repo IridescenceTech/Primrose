@@ -7,54 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7dcf0e8-c265-49b2-a885-72f5fc19d846" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/intellij-java-google-style.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/PrimroseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/PrimroseUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/game/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/game/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/game/ObjectType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/game/ObjectType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/game/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/game/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/game/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/game/Transform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/FramebufferObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/FramebufferObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/Mesh.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/controller/Freecam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/controller/Freecam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/geometry/Geometry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/geometry/Geometry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/geometry/GeometryBuilderUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/geometry/GeometryBuilderUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/DirectionalLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/DirectionalLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/Light.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/Light.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/LightType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/LightType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/PointLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/PointLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/SpotLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/SpotLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/Material.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialPhong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialPhong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/BasicShader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/BasicShader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/PhongShader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/PhongShader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/Shader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/texturing/Cubemap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/texturing/Cubemap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/texturing/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/texturing/Texture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/texturing/TextureAtlas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/texturing/TextureAtlas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/utils/OGLReporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/utils/OGLReporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/utils/OGLUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/utils/OGLUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/input/Cursor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/input/Cursor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/input/Keyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/input/Keyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/input/Mouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/input/Mouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/input/Scroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/input/Scroll.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/math/MathUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/math/MathUtilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/math/MatrixUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/math/MatrixUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/utils/FPSCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/utils/FPSCounter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/utils/LoggerFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/utils/LoggerFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/utils/Logging.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/utils/Logging.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/utils/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/utils/Timer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/window/FramebufferResizeCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/window/FramebufferResizeCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/window/GraphicsType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/window/GraphicsType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/window/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/window/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/window/WindowIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/window/WindowIcon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/window/WindowResizeCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/window/WindowResizeCallback.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="46" column="17" lean-forward="true" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
+            <state relative-caret-position="119">
+              <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -408,12 +361,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557276541124</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Reformatted code to Google's Java Format.">
+      <created>1557521427707</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1557521427707</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2647504" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -466,7 +425,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added LWJGL 3.2.0 to be Included." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added LWJGL 3.2.0 to be Included." />
+    <MESSAGE value="Reformatted code to Google's Java Format." />
+    <option name="LAST_COMMIT_MESSAGE" value="Reformatted code to Google's Java Format." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/input/Cursor.java">
@@ -886,8 +846,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="46" column="17" lean-forward="true" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
+        <state relative-caret-position="119">
+          <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
         </state>
       </provider>
     </entry>

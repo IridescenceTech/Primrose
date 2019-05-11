@@ -11,6 +11,7 @@ import org.iridescence.primrose.graphics.geometry.GeometryBuilderUtil;
 import org.iridescence.primrose.graphics.lights.DirectionalLight;
 import org.iridescence.primrose.graphics.materials.MaterialLambert;
 import org.iridescence.primrose.graphics.materials.MaterialPhong;
+import org.iridescence.primrose.graphics.materials.MaterialToon;
 import org.iridescence.primrose.graphics.texturing.Texture;
 import org.iridescence.primrose.graphics.utils.OGLUtils;
 import org.iridescence.primrose.utils.FPSCounter;
@@ -36,15 +37,15 @@ public class Test {
 
     scene.add(dirLight);
 
-    MaterialLambert materialLambert =
-        new MaterialLambert(
+    MaterialToon  materialToon =
+        new MaterialToon(
             new Texture(
-                "./assets/container.png", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR));
-    Mesh m = new Mesh(GeometryBuilderUtil.createCube(1), materialLambert);
+                "./assets/container.png", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR), 8.0f);
+    Mesh m = new Mesh(GeometryBuilderUtil.createCube(1), materialToon);
     scene.add(m);
 
     for (int i = 0; i < 100; i++) {
-      Mesh cubes = new Mesh(GeometryBuilderUtil.createCube(1), materialLambert);
+      Mesh cubes = new Mesh(GeometryBuilderUtil.createCube(1), materialToon);
       cubes.transform.position =
           new Vector3f(
               (float) Math.random() * 50 - 25,

@@ -9,6 +9,8 @@ import org.iridescence.primrose.graphics.Mesh;
 import org.iridescence.primrose.graphics.controller.Freecam;
 import org.iridescence.primrose.graphics.geometry.GeometryBuilderUtil;
 import org.iridescence.primrose.graphics.lights.DirectionalLight;
+import org.iridescence.primrose.graphics.lights.PointLight;
+import org.iridescence.primrose.graphics.materials.MaterialBlinnPhong;
 import org.iridescence.primrose.graphics.materials.MaterialLambert;
 import org.iridescence.primrose.graphics.materials.MaterialPhong;
 import org.iridescence.primrose.graphics.materials.MaterialToon;
@@ -28,19 +30,10 @@ public class Test {
     Freecam cam = new Freecam();
     Scene scene = new Scene();
 
-    DirectionalLight dirLight =
-        new DirectionalLight(
-            new Vector3f(7.5f, 7.5f, -1.0f), new Vector3f(1.0f, 0.9333f, 0.6901f), 1.0f);
-    dirLight.transform.rotation.y = (float) Math.random() * 360;
-    dirLight.transform.rotation.x = (float) Math.random() * 360;
-    dirLight.transform.rotation.z = (float) Math.random() * 360;
-
-    scene.add(dirLight);
-
-    MaterialToon  materialToon =
-        new MaterialToon(
+    MaterialBlinnPhong materialToon =
+        new MaterialBlinnPhong(
             new Texture(
-                "./assets/container.png", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR), 8.0f);
+                "./assets/container.png", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR), new Texture("./assets/container-s.png", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR), 2.0f, 0.5f);
     Mesh m = new Mesh(GeometryBuilderUtil.createCube(1), materialToon);
     scene.add(m);
 
@@ -59,6 +52,14 @@ public class Test {
       cubes.transform.UpdateTransform();
 
       scene.add(cubes);
+    }
+
+    for (int i = 0; i < 16; i++){
+      scene.add(new PointLight(
+          new Vector3f(
+              (float) Math.random() * 50 - 25,
+              (float) Math.random() * 50 - 25,
+              (float) Math.random() * 50 - 25), new Vector3f(1.0f), 2.0f, 0.2f, 0.22f));
     }
 
     FramebufferObject fbo = new FramebufferObject(Window.windowObject.getResolution(), true);

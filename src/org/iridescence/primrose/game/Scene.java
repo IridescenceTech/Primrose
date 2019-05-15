@@ -223,7 +223,6 @@ public class Scene {
   }
 
   public void render() {
-
     updateLighting();
 
     for(int i = 0; i < 16; i++){

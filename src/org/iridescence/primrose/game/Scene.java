@@ -9,18 +9,20 @@ import org.iridescence.primrose.graphics.lights.LightType;
 import org.iridescence.primrose.graphics.lights.PointLight;
 import org.iridescence.primrose.graphics.lights.SpotLight;
 import org.iridescence.primrose.graphics.shaders.IntegratedBlinnPhongShader;
-import org.iridescence.primrose.graphics.shaders.LambertShader;
-import org.iridescence.primrose.graphics.shaders.ToonShader;
+import org.iridescence.primrose.graphics.shaders.IntegratedLambertShader;
 import org.iridescence.primrose.utils.Logging;
 import org.joml.Vector3f;
 
 public class Scene {
 
-  final ArrayDeque<GameObject> meshes;
+  ArrayDeque<GameObject> meshes;
   final ArrayDeque<GameObject> lights;
+
   final Vector3f ambientColor;
   final float ambientIntensity;
   int directionalCount, pointCount, spotCount;
+
+
 
   boolean[] materialsUsed;
 
@@ -45,10 +47,13 @@ public class Scene {
   public void add(GameObject object) {
     switch (object.type) {
       case OBJECT_TYPE_MESH:
-        meshes.push(object);
-
-        //Check materials we need to actually update!
-        materialsUsed[((Mesh) object).material.type.getValue()] = true;
+        if(object.layer < 16 && object.layer >= 0){
+          meshes.push(object);
+          //Check materials we need to actually update!
+          materialsUsed[((Mesh) object).material.type.getValue()] = true;
+        }else{
+          Logging.logger.warning("Cannot have more than 16 layers!");
+        }
 
         break;
 
@@ -90,10 +95,10 @@ public class Scene {
   private void updateLighting() {
     // Updates light components for each shader.
 
-    if(materialsUsed[1]){
-      LambertShader.shader.bind();
-      LambertShader.shader.setUniformVec3f("ambient.color", ambientColor);
-      LambertShader.shader.setUniformFloat("ambient.intensity", ambientIntensity);
+    if(materialsUsed[1] || materialsUsed[4]){
+      IntegratedLambertShader.shader.bind();
+      IntegratedLambertShader.shader.setUniformVec3f("ambient.color", ambientColor);
+      IntegratedLambertShader.shader.setUniformFloat("ambient.intensity", ambientIntensity);
     }
 
     if(materialsUsed[2] || materialsUsed[3]){
@@ -102,11 +107,6 @@ public class Scene {
       IntegratedBlinnPhongShader.shader.setUniformFloat("ambient.intensity", ambientIntensity);
     }
 
-    if(materialsUsed[4]){
-      ToonShader.shader.bind();
-      ToonShader.shader.setUniformVec3f("ambient.color", ambientColor);
-      ToonShader.shader.setUniformFloat("ambient.intensity", ambientIntensity);
-    }
 
 
 
@@ -123,23 +123,13 @@ public class Scene {
         case LIGHT_TYPE_DIRECTIONAL:
           DirectionalLight dir = (DirectionalLight) temp;
 
-          if(materialsUsed[1]){
-            LambertShader.shader.bind();
+          if(materialsUsed[1] || materialsUsed[4]){
+            IntegratedLambertShader.shader.bind();
 
-            LambertShader.shader.setUniformVec3f("directional[" + dirCount + "].color", dir.color);
-            LambertShader.shader.setUniformFloat(
+            IntegratedLambertShader.shader.setUniformVec3f("directional[" + dirCount + "].color", dir.color);
+            IntegratedLambertShader.shader.setUniformFloat(
                 "directional[" + dirCount + "].intensity", dir.intensity);
-            LambertShader.shader.setUniformVec3f(
-                "directional[" + dirCount + "].direction", dir.direction);
-          }
-
-          if(materialsUsed[4]){
-            ToonShader.shader.bind();
-
-            ToonShader.shader.setUniformVec3f("directional[" + dirCount + "].color", dir.color);
-            ToonShader.shader.setUniformFloat(
-                "directional[" + dirCount + "].intensity", dir.intensity);
-            ToonShader.shader.setUniformVec3f(
+            IntegratedLambertShader.shader.setUniformVec3f(
                 "directional[" + dirCount + "].direction", dir.direction);
           }
 
@@ -159,31 +149,17 @@ public class Scene {
         case LIGHT_TYPE_POINTLIGHT:
           PointLight poi = (PointLight) temp;
 
-          if(materialsUsed[1]){
-            LambertShader.shader.bind();
+          if(materialsUsed[1] || materialsUsed[4]){
+            IntegratedLambertShader.shader.bind();
 
-            LambertShader.shader.setUniformVec3f(
+            IntegratedLambertShader.shader.setUniformVec3f(
                 "pointLights[" + poiCount + "].position", poi.transform.position);
-            LambertShader.shader.setUniformVec3f("pointLights[" + poiCount + "].color", poi.color);
-            LambertShader.shader.setUniformFloat(
+            IntegratedLambertShader.shader.setUniformVec3f("pointLights[" + poiCount + "].color", poi.color);
+            IntegratedLambertShader.shader.setUniformFloat(
                 "pointLights[" + poiCount + "].intensity", poi.intensity);
-            LambertShader.shader.setUniformFloat(
+            IntegratedLambertShader.shader.setUniformFloat(
                 "pointLights[" + poiCount + "].linear", poi.linearTerm);
-            LambertShader.shader.setUniformFloat(
-                "pointLights[" + poiCount + "].quadratic", poi.quadraticTerm);
-          }
-
-          if(materialsUsed[4]){
-            ToonShader.shader.bind();
-
-            ToonShader.shader.setUniformVec3f(
-                "pointLights[" + poiCount + "].position", poi.transform.position);
-            ToonShader.shader.setUniformVec3f("pointLights[" + poiCount + "].color", poi.color);
-            ToonShader.shader.setUniformFloat(
-                "pointLights[" + poiCount + "].intensity", poi.intensity);
-            ToonShader.shader.setUniformFloat(
-                "pointLights[" + poiCount + "].linear", poi.linearTerm);
-            ToonShader.shader.setUniformFloat(
+            IntegratedLambertShader.shader.setUniformFloat(
                 "pointLights[" + poiCount + "].quadratic", poi.quadraticTerm);
           }
 
@@ -207,36 +183,20 @@ public class Scene {
         case LIGHT_TYPE_SPOTLIGHT:
           SpotLight spo = (SpotLight) temp;
 
-          if(materialsUsed[1]){
-            LambertShader.shader.bind();
+          if(materialsUsed[1] || materialsUsed[4]){
+            IntegratedLambertShader.shader.bind();
 
-            LambertShader.shader.setUniformVec3f(
+            IntegratedLambertShader.shader.setUniformVec3f(
                 "spotLights[" + spoCount + "].position", spo.transform.position);
-            LambertShader.shader.setUniformVec3f(
+            IntegratedLambertShader.shader.setUniformVec3f(
                 "spotLights[" + spoCount + "].direction", spo.direction);
-            LambertShader.shader.setUniformVec3f("spotLights[" + spoCount + "].color", spo.color);
-            LambertShader.shader.setUniformFloat(
+            IntegratedLambertShader.shader.setUniformVec3f("spotLights[" + spoCount + "].color", spo.color);
+            IntegratedLambertShader.shader.setUniformFloat(
                 "spotLights[" + spoCount + "].intensity", spo.intensity);
-            LambertShader.shader.setUniformFloat("spotLights[" + spoCount + "].linear", spo.linearTerm);
-            LambertShader.shader.setUniformFloat(
+            IntegratedLambertShader.shader.setUniformFloat("spotLights[" + spoCount + "].linear", spo.linearTerm);
+            IntegratedLambertShader.shader.setUniformFloat(
                 "spotLights[" + spoCount + "].quadratic", spo.quadraticTerm);
-            LambertShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.mCutOff);
-          }
-
-          if(materialsUsed[4]){
-            ToonShader.shader.bind();
-
-            ToonShader.shader.setUniformVec3f(
-                "spotLights[" + spoCount + "].position", spo.transform.position);
-            ToonShader.shader.setUniformVec3f(
-                "spotLights[" + spoCount + "].direction", spo.direction);
-            ToonShader.shader.setUniformVec3f("spotLights[" + spoCount + "].color", spo.color);
-            ToonShader.shader.setUniformFloat(
-                "spotLights[" + spoCount + "].intensity", spo.intensity);
-            ToonShader.shader.setUniformFloat("spotLights[" + spoCount + "].linear", spo.linearTerm);
-            ToonShader.shader.setUniformFloat(
-                "spotLights[" + spoCount + "].quadratic", spo.quadraticTerm);
-            ToonShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.mCutOff);
+            IntegratedLambertShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.mCutOff);
           }
 
           if(materialsUsed[2] || materialsUsed[3]){
@@ -265,8 +225,13 @@ public class Scene {
 
     updateLighting();
 
-    for (GameObject mesh : meshes) {
-      ((Mesh) mesh).render();
+    for(int i = 0; i < 16; i++){
+      for (GameObject obj : meshes) {
+        if (obj.layer == i) {
+          ((Mesh) obj).render();
+        }
+      }
     }
+
   }
 }

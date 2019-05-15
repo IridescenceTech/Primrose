@@ -27,6 +27,27 @@ public class Mesh extends GameObject {
     transform.UpdateTransform();
   }
 
+  public Mesh(Geometry geo, Material mat, String tags) {
+    super(
+        new Transform(new Vector3f(0), new Vector3f(0), new Vector3f(1.0f)),
+        ObjectType.OBJECT_TYPE_MESH, tags);
+    geometry = geo;
+    material = mat;
+
+    isLit = true;
+    transform.UpdateTransform();
+  }
+  public Mesh(Geometry geo, Material mat, String tags, String names) {
+    super(
+        new Transform(new Vector3f(0), new Vector3f(0), new Vector3f(1.0f)),
+        ObjectType.OBJECT_TYPE_MESH, tags, names);
+    geometry = geo;
+    material = mat;
+
+    isLit = true;
+    transform.UpdateTransform();
+  }
+
   public void render() {
     transform.UpdateTransform(); // MAKE SURE THE TRANSFORM IS VALID!
     material.bindMaterial(transform.modelMatrix);

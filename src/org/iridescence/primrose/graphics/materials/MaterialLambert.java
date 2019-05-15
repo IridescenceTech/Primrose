@@ -4,7 +4,7 @@ import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
 
 import org.iridescence.primrose.graphics.Camera;
-import org.iridescence.primrose.graphics.shaders.LambertShader;
+import org.iridescence.primrose.graphics.shaders.IntegratedLambertShader;
 import org.iridescence.primrose.graphics.texturing.Texture;
 import org.joml.Matrix4f;
 
@@ -15,11 +15,12 @@ public class MaterialLambert extends Material {
 
   @Override
   public void bindMaterial(Matrix4f modelview) {
-    LambertShader.shader.bind();
-    LambertShader.shader.setUniformMat4("projViewMatrix", Camera.camera.getProjViewMatrix());
-    LambertShader.shader.setUniformMat4("modelMatrix", modelview);
-    LambertShader.shader.setUniformVec3f("cameraPosition", Camera.camera.position);
-    LambertShader.shader.setUniformInt("material.map", 0);
+    IntegratedLambertShader.shader.bind();
+    IntegratedLambertShader.shader.setUniformBoolean("toon", false);
+    IntegratedLambertShader.shader.setUniformMat4("projViewMatrix", Camera.camera.getProjViewMatrix());
+    IntegratedLambertShader.shader.setUniformMat4("modelMatrix", modelview);
+    IntegratedLambertShader.shader.setUniformVec3f("cameraPosition", Camera.camera.position);
+    IntegratedLambertShader.shader.setUniformInt("material.map", 0);
 
     glActiveTexture(GL_TEXTURE0);
     map.bind();
@@ -29,6 +30,6 @@ public class MaterialLambert extends Material {
   public void unbindMaterial() {
     glActiveTexture(GL_TEXTURE0);
     map.unbind();
-    LambertShader.shader.unbind();
+    IntegratedLambertShader.shader.unbind();
   }
 }

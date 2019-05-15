@@ -8,7 +8,7 @@ import org.iridescence.primrose.graphics.FramebufferObject;
 import org.iridescence.primrose.graphics.Mesh;
 import org.iridescence.primrose.graphics.controller.Freecam;
 import org.iridescence.primrose.graphics.geometry.GeometryBuilderUtil;
-import org.iridescence.primrose.graphics.lights.PointLight;
+import org.iridescence.primrose.graphics.lights.DirectionalLight;
 import org.iridescence.primrose.graphics.materials.MaterialBlinnPhong;
 import org.iridescence.primrose.graphics.texturing.Texture;
 import org.iridescence.primrose.graphics.utils.OGLUtils;
@@ -29,9 +29,16 @@ public class Test {
     MaterialBlinnPhong materialToon =
         new MaterialBlinnPhong(
             new Texture(
-                "./assets/container.png", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR), new Texture("./assets/container-s.png", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR), 2.0f, 0.5f);
+                "./assets/container.png", GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR),
+            new Texture(
+                "./assets/container-s.png", GL_NEAREST_MIPMAP_LINEAR, GL_NEAREST_MIPMAP_LINEAR), 1.5f, 0.65f);
     Mesh m = new Mesh(GeometryBuilderUtil.createCube(1), materialToon);
     scene.add(m);
+
+    DirectionalLight directionalLight = new DirectionalLight(new Vector3f(0.0f), new Vector3f(1.0f), 1.0f);
+    directionalLight.transform.rotation.x = 45;
+    directionalLight.transform.rotation.y = 40;
+    scene.add(directionalLight);
 
     for (int i = 0; i < 100; i++) {
       Mesh cubes = new Mesh(GeometryBuilderUtil.createCube(1), materialToon);
@@ -48,14 +55,6 @@ public class Test {
       cubes.transform.UpdateTransform();
 
       scene.add(cubes);
-    }
-
-    for (int i = 0; i < 16; i++){
-      scene.add(new PointLight(
-          new Vector3f(
-              (float) Math.random() * 50 - 25,
-              (float) Math.random() * 50 - 25,
-              (float) Math.random() * 50 - 25), new Vector3f(1.0f), 2.0f, 0.2f, 0.22f));
     }
 
     FramebufferObject fbo = new FramebufferObject(Window.windowObject.getResolution(), true);

@@ -31,9 +31,6 @@ struct SpotLight{
 
 struct Material{
     sampler2D map;
-    sampler2D specMap;
-    float specularIntensity;
-    float shininess;
 };
 
 uniform AmbientLight ambient;
@@ -53,15 +50,15 @@ in vec2 texcoord;
 in vec3 normal;
 in vec3 fragPos;
 
-bool blinnPhong;
+bool toon;
 
 vec3 CalcDirectional(DirectionalLight light);
 vec3 CalcPoint(PointLight light);
 vec3 CalcSpot(SpotLight light);
 
 vec4 diffuseMap = texture(material.map, texcoord);
-vec4 specMap = texture(material.specMap, texcoord);
-
+//vec4 specMap = texture(material.specMap, texcoord);
+vec4 specMap = vec4(1.0f);
 void main(){
     vec3 result = vec3(0);
 
@@ -85,7 +82,11 @@ void main(){
     for(int i = 0; i < NUMBER_OF_SPOT_LIGHTS_MAX; i++)
     result += CalcSpot(spotLights[i]);
 
-    outColor = vec4(result, diffuseMap.a);
+    if(toon){
+        outColor = vec4(floor(result.rgb * 8.0f) / 8.0f, 1.0f);
+    }else{
+        outColor = vec4(result, diffuseMap.a);
+    }
 }
 
 vec3 CalcDirectional(DirectionalLight dir){
@@ -96,21 +97,7 @@ vec3 CalcDirectional(DirectionalLight dir){
 
         float diff = max(dot(norm, lightDir), 0.0);
         vec3 diffuse = dir.intensity * dir.color * diff * diffuseMap.rgb;
-
-        vec3 specularFactor = vec3(0.0f);
-        if(dot(norm, lightDir) >= 0.0f){
-            float spec = 0.0f;
-            if(blinnPhong){
-                vec3 halfwayDir = normalize(lightDir + viewDir);
-                spec = pow(max(dot(norm, halfwayDir), 0), pow(2, material.shininess * 10.0f / 4.0f));
-            }else{
-                vec3 reflectDir = reflect(-lightDir, norm);
-                spec = pow(max(dot(viewDir, reflectDir), 0), pow(2, material.shininess * 10.0f));
-            }
-            specularFactor = material.specularIntensity * spec * dir.color * dir.intensity * specMap.rgb;
-        }
-
-        return (diffuse + specularFactor);
+        return (diffuse);
     }else{
         return vec3(0.0f);
     }
@@ -125,24 +112,10 @@ vec3 CalcPoint(PointLight point){
         float diff = max(dot(norm, lightDir), 0.0);
         vec3 diffuse = point.intensity * point.color * diff * diffuseMap.rgb;
 
-        vec3 specularFactor = vec3(0.0f);
-        if(dot(norm, lightDir) >= 0.0f){
-            float spec = 0.0f;
-            if(blinnPhong){
-                vec3 halfwayDir = normalize(lightDir + viewDir);
-                spec = pow(max(dot(norm, halfwayDir), 0), pow(2, material.shininess * 10.0f / 4.0f));
-            }else{
-                vec3 reflectDir = reflect(-lightDir, norm);
-                spec = pow(max(dot(viewDir, reflectDir), 0), pow(2, material.shininess * 10.0f));
-            }
-            specularFactor = material.specularIntensity * spec * point.color * point.intensity * specMap.rgb;
-        }
-
         float distance = length(point.position - fragPos);
         float attenuation = 1.0 / (1 + point.linear * distance + point.quadratic * (distance * distance));
         diffuse *= attenuation;
-        specularFactor *= attenuation;
-        return (diffuse + specularFactor);
+        return (diffuse);
     }else{
         return vec3(0.0f);
     }
@@ -154,18 +127,6 @@ vec3 CalcSpot(SpotLight spot){
         vec3 norm = normalize(normal);
         float diff = max(dot(norm, lightDir), 0.0);
         vec3 viewDir = normalize(cameraPosition - fragPos);
-        // specular shading
-
-        float spec = 0.0f;
-        if(dot(norm, lightDir) >= 0.0f){
-            if(blinnPhong){
-                vec3 halfwayDir = normalize(lightDir + viewDir);
-                spec = pow(max(dot(norm, halfwayDir), 0.0), pow(2, material.shininess * 10.0f/4.0f));
-            }else{
-                vec3 reflectDir = reflect(-lightDir, norm);
-                spec = pow(max(dot(viewDir, reflectDir), 0.0), pow(2,material.shininess * 10.0f));
-            }
-        }
 
         // attenuation
         float distance = length(spot.position - fragPos);
@@ -176,11 +137,9 @@ vec3 CalcSpot(SpotLight spot){
         float intensity = clamp((theta) / epsilon, 0.0, 1.0);
         // combine results
         vec3 diffuse = spot.color * spot.intensity * diff * diffuseMap.rgb;
-        vec3 specular = spot.color * spot.intensity * spec * specMap.rgb;
 
         diffuse *= attenuation * intensity;
-        specular *= attenuation * intensity;
-        return (diffuse + specular);
+        return (diffuse);
     }else {
         return vec3(0.0f);
     }

@@ -17,5 +17,19 @@ public abstract class Light extends GameObject {
     type = ty;
   }
 
+  public Light(Vector3f pos, Vector3f col, float intense, LightType ty, String tags) {
+    super(new Transform(pos, new Vector3f(0.0f), new Vector3f(1.0f)), ObjectType.OBJECT_TYPE_LIGHT, tags);
+    color = col;
+    intensity = intense;
+    type = ty;
+  }
+
+  public Light(Vector3f pos, Vector3f col, float intense, LightType ty, String tags, String names) {
+    super(new Transform(pos, new Vector3f(0.0f), new Vector3f(1.0f)), ObjectType.OBJECT_TYPE_LIGHT, tags, names);
+    color = col;
+    intensity = intense;
+    type = ty;
+  }
+
   public abstract void Update();
 }

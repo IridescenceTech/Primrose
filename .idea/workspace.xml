@@ -7,18 +7,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7dcf0e8-c265-49b2-a885-72f5fc19d846" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/integratedPhong.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integratedPhong.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/IntegratedBlinnPhongShader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integratedLambert.frag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integratedLambert.vert" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/IntegratedLambertShader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integratedPhong.frag" beforeDir="false" afterPath="$PROJECT_DIR$/integratedPhong.frag" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/game/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/game/GameObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/game/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/game/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialBlinnPhong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialBlinnPhong.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/Mesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/Light.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/Light.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialLambert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialLambert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialPhong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialPhong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/BlinnPhongShader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/PhongShader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/Shader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialToon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialToon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/LambertShader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/ToonShader.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,62 +40,95 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
+            <state relative-caret-position="358">
+              <caret line="40" column="9" lean-forward="true" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialPhong.java">
+        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/window/Window.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="765">
+              <caret line="230" column="51" lean-forward="true" selection-start-line="230" selection-start-column="51" selection-end-line="230" selection-end-column="51" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/window/GraphicsType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/Material.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/Mesh.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="491">
+              <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/Light.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="76" selection-start-line="7" selection-start-column="76" selection-end-line="7" selection-end-column="76" />
+              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/IntegratedBlinnPhongShader.java">
+        <entry file="file://$PROJECT_DIR$/integratedLambert.frag">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="4">
+              <caret line="117" column="25" lean-forward="true" selection-start-line="117" selection-start-column="25" selection-end-line="117" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/integratedPhong.vert">
+        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/game/ObjectType.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="68">
+              <caret line="4" column="19" lean-forward="true" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/integratedPhong.frag">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="63" column="26" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/geometry/GeometryBuilderUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-53">
-              <caret line="177" column="10" lean-forward="true" selection-start-line="177" selection-start-column="10" selection-end-line="177" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/game/Scene.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3211">
-              <caret line="255" column="11" selection-start-line="255" selection-start-column="11" selection-end-line="255" selection-end-column="11" />
+            <state relative-caret-position="134">
+              <caret line="231" column="21" selection-start-line="231" selection-start-column="21" selection-end-line="231" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,31 +137,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialLambert.java">
+        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/game/GameObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="48" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialBlinnPhong.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="76" selection-start-line="7" selection-start-column="76" selection-end-line="7" selection-end-column="76" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/Shader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="189" column="3" lean-forward="true" selection-start-line="189" selection-start-column="3" selection-end-line="189" selection-end-column="3" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-2">
+              <caret line="9" column="49" lean-forward="true" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -164,10 +178,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/opengl/controller/Freecam.java" />
-        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/PrimroseUtil.java" />
-        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/opengl/lights/Light.java" />
-        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/opengl/lights/DirectionalLight.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/opengl/geometry/GeometryBuilderUtil.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/game/Transform.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/opengl/materials/Material.java" />
@@ -178,10 +188,8 @@
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/window/FramebufferResizeCallback.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/game/ObjectType.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/game/Object.java" />
-        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/Mesh.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/utils/FPSCounter.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/LightType.java" />
-        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/Light.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/PointLight.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/phong.frag" />
@@ -202,19 +210,25 @@
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/Material.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialType.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/ToonShader.java" />
-        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialToon.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialBasic.java" />
-        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/Test.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/IntegratedBlinnPhongShader.java" />
         <option value="$PROJECT_DIR$/integratedPhong.vert" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/BlinnPhongShader.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/Shader.java" />
-        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialLambert.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialBlinnPhong.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialPhong.java" />
-        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/game/Scene.java" />
         <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/geometry/GeometryBuilderUtil.java" />
+        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/IntegratedLamberShader.java" />
+        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/IntegratedLambertShader.java" />
+        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialLambert.java" />
         <option value="$PROJECT_DIR$/integratedPhong.frag" />
+        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialToon.java" />
+        <option value="$PROJECT_DIR$/integratedLambert.frag" />
+        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/Mesh.java" />
+        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/Light.java" />
+        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/Test.java" />
+        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/game/GameObject.java" />
+        <option value="$PROJECT_DIR$/src/org/iridescence/primrose/game/Scene.java" />
       </list>
     </option>
   </component>
@@ -294,15 +308,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="primrose" type="462c0819:PsiDirectoryNode" />
               <item name="graphics" type="462c0819:PsiDirectoryNode" />
-              <item name="geometry" type="462c0819:PsiDirectoryNode" />
+              <item name="lights" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Primrose" type="b2602c69:ProjectViewProjectNode" />
               <item name="Primrose" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="primrose" type="462c0819:PsiDirectoryNode" />
-              <item name="graphics" type="462c0819:PsiDirectoryNode" />
-              <item name="shaders" type="462c0819:PsiDirectoryNode" />
+              <item name="window" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -323,8 +336,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.iridescence.primrose.graphics.materials" />
       <recent name="org.iridescence.primrose.graphics.shaders" />
+      <recent name="org.iridescence.primrose.graphics.materials" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Nathan\Desktop\Primrose" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -396,7 +412,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557686486572</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Integrated Phong and Blinn Phong Shading under one shader.">
+      <created>1557921433357</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1557921433357</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -412,7 +435,7 @@
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2677761" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27912253" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -442,43 +465,10 @@
     <MESSAGE value="Reformatted code to Google's Java Format." />
     <MESSAGE value="Added a Toon Shader." />
     <MESSAGE value="Added the Blinn-Phong Lighting Model to the Project." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the Blinn-Phong Lighting Model to the Project." />
+    <MESSAGE value="Integrated Phong and Blinn Phong Shading under one shader." />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrated Phong and Blinn Phong Shading under one shader." />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/utils/Logging.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/controller/Freecam.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="72" column="21" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#406#407#0" expanded="true" />
-            <element signature="e#437#438#0" expanded="true" />
-            <element signature="e#2736#2737#0" expanded="true" />
-            <element signature="e#2767#2768#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/window/WindowResizeCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/window/WindowIcon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -486,13 +476,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/window/GraphicsType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -508,16 +491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/Mesh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="35" column="34" lean-forward="true" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/utils/FPSCounter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -529,16 +502,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/Light.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -661,16 +624,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/window/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-466">
-          <caret line="450" column="10" selection-start-line="450" selection-start-column="10" selection-end-line="450" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/geometry/Geometry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -708,37 +661,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/game/GameObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/game/ObjectType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="19" lean-forward="true" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/Material.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/LambertShader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2788">
-          <caret line="164" column="16" selection-start-line="164" selection-start-column="16" selection-end-line="164" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/ToonShader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1853">
@@ -753,16 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/PrimroseUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/BasicShader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -774,39 +686,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialBasic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#221#222#0" expanded="true" />
-            <element signature="e#235#236#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialToon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="25" column="64" selection-start-line="25" selection-start-column="64" selection-end-line="25" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="19" column="3" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
         </state>
       </provider>
     </entry>
@@ -821,48 +704,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/IntegratedBlinnPhongShader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/Shader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret line="189" column="3" lean-forward="true" selection-start-line="189" selection-start-column="3" selection-end-line="189" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialLambert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="48" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialBlinnPhong.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="76" selection-start-line="7" selection-start-column="76" selection-end-line="7" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialPhong.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="76" selection-start-line="7" selection-start-column="76" selection-end-line="7" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/game/Scene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3211">
-          <caret line="255" column="11" selection-start-line="255" selection-start-column="11" selection-end-line="255" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -878,15 +723,184 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/geometry/GeometryBuilderUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53">
-          <caret line="177" column="10" lean-forward="true" selection-start-line="177" selection-start-column="10" selection-end-line="177" selection-end-column="10" />
+        <state relative-caret-position="236">
+          <caret line="194" column="18" lean-forward="true" selection-start-line="194" selection-start-column="18" selection-end-line="194" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialPhong.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="76" selection-start-line="7" selection-start-column="76" selection-end-line="7" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/LambertShader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="164" column="16" selection-start-line="164" selection-start-column="16" selection-end-line="164" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integratedLambert.vert">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialBasic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialBlinnPhong.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/IntegratedBlinnPhongShader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialLambert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="32" column="27" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/MaterialToon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="25" column="68" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/PrimroseUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/integratedPhong.frag">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="63" column="26" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
+        <state relative-caret-position="238">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/shaders/IntegratedLambertShader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/materials/Material.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="40" column="9" lean-forward="true" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/window/GraphicsType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/window/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="230" column="51" lean-forward="true" selection-start-line="230" selection-start-column="51" selection-end-line="230" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integratedLambert.frag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4">
+          <caret line="117" column="25" lean-forward="true" selection-start-line="117" selection-start-column="25" selection-end-line="117" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/Mesh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/graphics/lights/Light.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/game/ObjectType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="19" lean-forward="true" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/game/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2">
+          <caret line="9" column="49" lean-forward="true" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/iridescence/primrose/game/Scene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="231" column="21" selection-start-line="231" selection-start-column="21" selection-end-line="231" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

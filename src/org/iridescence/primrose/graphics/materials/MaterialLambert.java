@@ -1,12 +1,10 @@
 package org.iridescence.primrose.graphics.materials;
 
 import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
-import static org.lwjgl.opengl.GL13.GL_TEXTURE1;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
 
 import org.iridescence.primrose.graphics.Camera;
 import org.iridescence.primrose.graphics.shaders.LambertShader;
-import org.iridescence.primrose.graphics.shaders.PhongShader;
 import org.iridescence.primrose.graphics.texturing.Texture;
 import org.joml.Matrix4f;
 

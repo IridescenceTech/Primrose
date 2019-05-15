@@ -188,4 +188,8 @@ public abstract class Shader {
     data.get(fb);
     glUniformMatrix4fv(glGetUniformLocation(programID, uniform), false, fb);
   }
+
+  public void setUniformBoolean(String uniform, boolean bool){
+    glUniform1i(glGetUniformLocation(programID, uniform), bool ? 1 : 0);
+  }
 }

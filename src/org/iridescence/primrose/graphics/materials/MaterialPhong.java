@@ -5,7 +5,7 @@ import static org.lwjgl.opengl.GL13.GL_TEXTURE1;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
 
 import org.iridescence.primrose.graphics.Camera;
-import org.iridescence.primrose.graphics.shaders.PhongShader;
+import org.iridescence.primrose.graphics.shaders.IntegratedBlinnPhongShader;
 import org.iridescence.primrose.graphics.texturing.Texture;
 import org.joml.Matrix4f;
 
@@ -24,14 +24,15 @@ public class MaterialPhong extends Material {
 
   @Override
   public void bindMaterial(Matrix4f modelview) {
-    PhongShader.shader.bind();
-    PhongShader.shader.setUniformMat4("projViewMatrix", Camera.camera.getProjViewMatrix());
-    PhongShader.shader.setUniformMat4("modelMatrix", modelview);
-    PhongShader.shader.setUniformVec3f("cameraPosition", Camera.camera.position);
-    PhongShader.shader.setUniformFloat("material.specularIntensity", specularIntensity);
-    PhongShader.shader.setUniformFloat("material.shininess", shininess);
-    PhongShader.shader.setUniformInt("material.map", 0);
-    PhongShader.shader.setUniformInt("material.specMap", 1);
+    IntegratedBlinnPhongShader.shader.bind();
+    IntegratedBlinnPhongShader.shader.setUniformBoolean("blinnPhong", false);
+    IntegratedBlinnPhongShader.shader.setUniformMat4("projViewMatrix", Camera.camera.getProjViewMatrix());
+    IntegratedBlinnPhongShader.shader.setUniformMat4("modelMatrix", modelview);
+    IntegratedBlinnPhongShader.shader.setUniformVec3f("cameraPosition", Camera.camera.position);
+    IntegratedBlinnPhongShader.shader.setUniformFloat("material.specularIntensity", specularIntensity);
+    IntegratedBlinnPhongShader.shader.setUniformFloat("material.shininess", shininess);
+    IntegratedBlinnPhongShader.shader.setUniformInt("material.map", 0);
+    IntegratedBlinnPhongShader.shader.setUniformInt("material.specMap", 1);
 
     glActiveTexture(GL_TEXTURE0);
     map.bind();
@@ -45,6 +46,6 @@ public class MaterialPhong extends Material {
     specMap.unbind();
     glActiveTexture(GL_TEXTURE0);
     map.unbind();
-    PhongShader.shader.unbind();
+    IntegratedBlinnPhongShader.shader.unbind();
   }
 }

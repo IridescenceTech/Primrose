@@ -8,10 +8,8 @@ import org.iridescence.primrose.graphics.lights.Light;
 import org.iridescence.primrose.graphics.lights.LightType;
 import org.iridescence.primrose.graphics.lights.PointLight;
 import org.iridescence.primrose.graphics.lights.SpotLight;
-import org.iridescence.primrose.graphics.shaders.BasicShader;
-import org.iridescence.primrose.graphics.shaders.BlinnPhongShader;
+import org.iridescence.primrose.graphics.shaders.IntegratedBlinnPhongShader;
 import org.iridescence.primrose.graphics.shaders.LambertShader;
-import org.iridescence.primrose.graphics.shaders.PhongShader;
 import org.iridescence.primrose.graphics.shaders.ToonShader;
 import org.iridescence.primrose.utils.Logging;
 import org.joml.Vector3f;
@@ -98,16 +96,10 @@ public class Scene {
       LambertShader.shader.setUniformFloat("ambient.intensity", ambientIntensity);
     }
 
-    if(materialsUsed[2]){
-      PhongShader.shader.bind();
-      PhongShader.shader.setUniformVec3f("ambient.color", ambientColor);
-      PhongShader.shader.setUniformFloat("ambient.intensity", ambientIntensity);
-    }
-
-    if(materialsUsed[3]){
-      BlinnPhongShader.shader.bind();
-      BlinnPhongShader.shader.setUniformVec3f("ambient.color", ambientColor);
-      BlinnPhongShader.shader.setUniformFloat("ambient.intensity", ambientIntensity);
+    if(materialsUsed[2] || materialsUsed[3]){
+      IntegratedBlinnPhongShader.shader.bind();
+      IntegratedBlinnPhongShader.shader.setUniformVec3f("ambient.color", ambientColor);
+      IntegratedBlinnPhongShader.shader.setUniformFloat("ambient.intensity", ambientIntensity);
     }
 
     if(materialsUsed[4]){
@@ -151,26 +143,15 @@ public class Scene {
                 "directional[" + dirCount + "].direction", dir.direction);
           }
 
-          if(materialsUsed[2]){
-            PhongShader.shader.bind();
+          if(materialsUsed[2] || materialsUsed[3]){
+            IntegratedBlinnPhongShader.shader.bind();
 
-            PhongShader.shader.setUniformVec3f("directional[" + dirCount + "].color", dir.color);
-            PhongShader.shader.setUniformFloat(
+            IntegratedBlinnPhongShader.shader.setUniformVec3f("directional[" + dirCount + "].color", dir.color);
+            IntegratedBlinnPhongShader.shader.setUniformFloat(
                 "directional[" + dirCount + "].intensity", dir.intensity);
-            PhongShader.shader.setUniformVec3f(
+            IntegratedBlinnPhongShader.shader.setUniformVec3f(
                 "directional[" + dirCount + "].direction", dir.direction);
           }
-
-          if(materialsUsed[3]){
-            BlinnPhongShader.shader.bind();
-
-            BlinnPhongShader.shader.setUniformVec3f("directional[" + dirCount + "].color", dir.color);
-            BlinnPhongShader.shader.setUniformFloat(
-                "directional[" + dirCount + "].intensity", dir.intensity);
-            BlinnPhongShader.shader.setUniformVec3f(
-                "directional[" + dirCount + "].direction", dir.direction);
-          }
-
 
           dirCount++;
           break;
@@ -206,32 +187,18 @@ public class Scene {
                 "pointLights[" + poiCount + "].quadratic", poi.quadraticTerm);
           }
 
-          if(materialsUsed[2]){
-            PhongShader.shader.bind();
-            PhongShader.shader.setUniformVec3f(
+          if(materialsUsed[2] || materialsUsed[3]){
+            IntegratedBlinnPhongShader.shader.bind();
+            IntegratedBlinnPhongShader.shader.setUniformVec3f(
                 "pointLights[" + poiCount + "].position", poi.transform.position);
-            PhongShader.shader.setUniformVec3f("pointLights[" + poiCount + "].color", poi.color);
-            PhongShader.shader.setUniformFloat(
+            IntegratedBlinnPhongShader.shader.setUniformVec3f("pointLights[" + poiCount + "].color", poi.color);
+            IntegratedBlinnPhongShader.shader.setUniformFloat(
                 "pointLights[" + poiCount + "].intensity", poi.intensity);
-            PhongShader.shader.setUniformFloat(
+            IntegratedBlinnPhongShader.shader.setUniformFloat(
                 "pointLights[" + poiCount + "].linear", poi.linearTerm);
-            PhongShader.shader.setUniformFloat(
+            IntegratedBlinnPhongShader.shader.setUniformFloat(
                 "pointLights[" + poiCount + "].quadratic", poi.quadraticTerm);
           }
-
-          if(materialsUsed[3]){
-            BlinnPhongShader.shader.bind();
-            BlinnPhongShader.shader.setUniformVec3f(
-                "pointLights[" + poiCount + "].position", poi.transform.position);
-            BlinnPhongShader.shader.setUniformVec3f("pointLights[" + poiCount + "].color", poi.color);
-            BlinnPhongShader.shader.setUniformFloat(
-                "pointLights[" + poiCount + "].intensity", poi.intensity);
-            BlinnPhongShader.shader.setUniformFloat(
-                "pointLights[" + poiCount + "].linear", poi.linearTerm);
-            BlinnPhongShader.shader.setUniformFloat(
-                "pointLights[" + poiCount + "].quadratic", poi.quadraticTerm);
-          }
-
 
 
           poiCount++;
@@ -272,39 +239,21 @@ public class Scene {
             ToonShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.mCutOff);
           }
 
-          if(materialsUsed[2]){
-            PhongShader.shader.bind();
+          if(materialsUsed[2] || materialsUsed[3]){
+            IntegratedBlinnPhongShader.shader.bind();
 
-            PhongShader.shader.setUniformVec3f(
+            IntegratedBlinnPhongShader.shader.setUniformVec3f(
                 "spotLights[" + spoCount + "].position", spo.transform.position);
-            PhongShader.shader.setUniformVec3f(
+            IntegratedBlinnPhongShader.shader.setUniformVec3f(
                 "spotLights[" + spoCount + "].direction", spo.direction);
-            PhongShader.shader.setUniformVec3f("spotLights[" + spoCount + "].color", spo.color);
-            PhongShader.shader.setUniformFloat(
+            IntegratedBlinnPhongShader.shader.setUniformVec3f("spotLights[" + spoCount + "].color", spo.color);
+            IntegratedBlinnPhongShader.shader.setUniformFloat(
                 "spotLights[" + spoCount + "].intensity", spo.intensity);
-            PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].linear", spo.linearTerm);
-            PhongShader.shader.setUniformFloat(
+            IntegratedBlinnPhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].linear", spo.linearTerm);
+            IntegratedBlinnPhongShader.shader.setUniformFloat(
                 "spotLights[" + spoCount + "].quadratic", spo.quadraticTerm);
-            PhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.mCutOff);
+            IntegratedBlinnPhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.mCutOff);
           }
-
-          if(materialsUsed[3]){
-            BlinnPhongShader.shader.bind();
-
-            BlinnPhongShader.shader.setUniformVec3f(
-                "spotLights[" + spoCount + "].position", spo.transform.position);
-            BlinnPhongShader.shader.setUniformVec3f(
-                "spotLights[" + spoCount + "].direction", spo.direction);
-            BlinnPhongShader.shader.setUniformVec3f("spotLights[" + spoCount + "].color", spo.color);
-            BlinnPhongShader.shader.setUniformFloat(
-                "spotLights[" + spoCount + "].intensity", spo.intensity);
-            BlinnPhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].linear", spo.linearTerm);
-            BlinnPhongShader.shader.setUniformFloat(
-                "spotLights[" + spoCount + "].quadratic", spo.quadraticTerm);
-            BlinnPhongShader.shader.setUniformFloat("spotLights[" + spoCount + "].cutOff", spo.mCutOff);
-          }
-
-
 
           spoCount++;
           break;

@@ -47,13 +47,14 @@ public class Scene {
   public void add(GameObject object) {
     switch (object.type) {
       case OBJECT_TYPE_MESH:
-        if(object.layer < 16 && object.layer >= 0){
-          meshes.push(object);
-          //Check materials we need to actually update!
-          materialsUsed[((Mesh) object).material.type.getValue()] = true;
-        }else{
-          Logging.logger.warning("Cannot have more than 16 layers!");
+        if(object.layer >= 16 || object.layer < 0){
+          Logging.logger.warning("Cannot have more than 16 layers! GameObject reassigned to layer 0!");
+          object.layer = 0;
         }
+
+        meshes.push(object);
+        //Check materials we need to actually update!
+        materialsUsed[((Mesh) object).material.type.getValue()] = true;
 
         break;
 
@@ -234,4 +235,52 @@ public class Scene {
     }
 
   }
+
+  public GameObject getGameObjectByName(String name){
+    GameObject res;
+
+    for(GameObject obj : meshes){
+      if(obj.name.equals(name)){
+        return obj;
+      }
+    }
+
+    return null;
+  }
+
+
+  public GameObject getGameObjectByTag(String tag){
+    GameObject res;
+
+    for(GameObject obj : meshes){
+      if(obj.tag.equals(tag)){
+        return obj;
+      }
+    }
+
+    return null;
+  }
+
+  public ArrayDeque<GameObject> getGameObjectsByTag(String tag){
+    ArrayDeque<GameObject> res = new ArrayDeque<>();
+
+    for(GameObject obj : meshes){
+      if(obj.tag.equals(tag)){
+        res.push(obj);
+      }
+    }
+    return res;
+  }
+
+  public ArrayDeque<GameObject> getGameObjectsByLayer(short layer){
+    ArrayDeque<GameObject> res = new ArrayDeque<>();
+
+    for(GameObject obj : meshes){
+      if(obj.layer == layer){
+        res.push(obj);
+      }
+    }
+    return res;
+  }
+
 }

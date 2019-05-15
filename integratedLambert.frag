@@ -57,8 +57,6 @@ vec3 CalcPoint(PointLight light);
 vec3 CalcSpot(SpotLight light);
 
 vec4 diffuseMap = texture(material.map, texcoord);
-//vec4 specMap = texture(material.specMap, texcoord);
-vec4 specMap = vec4(1.0f);
 void main(){
     vec3 result = vec3(0);
 

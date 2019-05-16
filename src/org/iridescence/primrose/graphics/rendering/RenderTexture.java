@@ -120,4 +120,8 @@ public class RenderTexture {
   public int getFBO() {
     return fboID;
   }
+
+  public Vector2i getBufferResolution(){
+    return bufferResolution;
+  }
 }

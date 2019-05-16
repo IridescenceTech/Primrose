@@ -11,6 +11,7 @@ import org.iridescence.primrose.graphics.lights.DirectionalLight;
 import org.iridescence.primrose.graphics.materials.MaterialBlinnPhong;
 import org.iridescence.primrose.graphics.rendering.RenderPass;
 import org.iridescence.primrose.graphics.rendering.RenderTargets;
+import org.iridescence.primrose.graphics.rendering.Renderer;
 import org.iridescence.primrose.graphics.texturing.Texture;
 import org.iridescence.primrose.graphics.utils.OGLUtils;
 import org.iridescence.primrose.utils.FPSCounter;
@@ -22,11 +23,9 @@ public class Test {
   public static void main(String[] args) {
     PrimroseUtil.init(800, 540, "Test", false);
     Window.windowObject.setVsync(false);
-
     Timer t = new Timer();
     Freecam cam = new Freecam();
     Scene scene = new Scene();
-
     MaterialBlinnPhong materialBlinnPhong =
         new MaterialBlinnPhong(
             new Texture(
@@ -35,13 +34,12 @@ public class Test {
                 "./assets/container-s.png", GL_NEAREST_MIPMAP_LINEAR, GL_NEAREST_MIPMAP_LINEAR), 1.5f, 0.65f);
     Mesh m = new Mesh(GeometryBuilderUtil.createCube(1), materialBlinnPhong);
     scene.add(m);
-
     DirectionalLight directionalLight = new DirectionalLight(new Vector3f(0.0f), new Vector3f(1.0f), 1.5f);
     directionalLight.transform.rotation.x = 45;
     directionalLight.transform.rotation.y = 40;
     scene.add(directionalLight);
 
-    RenderPass renderPass = new RenderPass(scene, true, RenderTargets.COLOR_TARGET);
+    Renderer renderer = new Renderer();
 
     while (!Window.windowObject.shouldClose()) {
       Window.windowObject.Clear();
@@ -51,13 +49,7 @@ public class Test {
       cam.HandleKeyUpdate(t.deltaTime());
       cam.Update();
 
-      renderPass.render();
-
-      OGLUtils.oglResolveFrameBuffers(
-          0,
-          Window.windowObject.getResolution(),
-          renderPass.tex.getFBO(),
-          Window.windowObject.getResolution());
+      renderer.render(scene);
 
       Window.windowObject.Render();
     }

@@ -5,7 +5,7 @@ import org.iridescence.primrose.window.Window;
 
 public class RenderPass {
 
-  private Scene m_scene;
+  public Scene m_scene;
   public RenderTexture tex;
 
   public RenderPass(Scene scene, boolean hdr, int renderFlags){

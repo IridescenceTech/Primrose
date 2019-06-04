@@ -10,12 +10,14 @@ import org.iridescence.primrose.graphics.lights.PointLight;
 import org.iridescence.primrose.graphics.lights.SpotLight;
 import org.iridescence.primrose.graphics.shaders.IntegratedBlinnPhongShader;
 import org.iridescence.primrose.graphics.shaders.IntegratedLambertShader;
+import org.iridescence.primrose.graphics.sprite.Sprite;
 import org.iridescence.primrose.utils.Logging;
 import org.joml.Vector3f;
 
 public class Scene {
 
   ArrayDeque<GameObject> meshes;
+  ArrayDeque<GameObject> sprites;
   final ArrayDeque<GameObject> lights;
 
   final Vector3f ambientColor;
@@ -29,6 +31,7 @@ public class Scene {
   public Scene() {
     meshes = new ArrayDeque<>();
     lights = new ArrayDeque<>();
+    sprites = new ArrayDeque<>();
 
     ambientColor = new Vector3f(1.0f);
     ambientIntensity = 0.1f;
@@ -56,6 +59,15 @@ public class Scene {
         //Check materials we need to actually update!
         materialsUsed[((Mesh) object).material.type.getValue()] = true;
 
+        break;
+
+      case OBJECT_TYPE_SPRITE:
+        if(object.layer >= 16 || object.layer < 0){
+          Logging.logger.warning("Cannot have more than 16 layers! GameObject reassigned to layer 0!");
+          object.layer = 0;
+        }
+        sprites.push(object);
+        materialsUsed[0] = true;
         break;
 
       case OBJECT_TYPE_LIGHT:
@@ -229,6 +241,16 @@ public class Scene {
       for (GameObject obj : meshes) {
         if (obj.layer == i) {
           ((Mesh) obj).render();
+        }
+      }
+    }
+
+    //Sprites are rendered afterwards
+
+    for(int i = 0; i < 16; i++){
+      for (GameObject obj : sprites) {
+        if (obj.layer == i) {
+          ((Sprite) obj).render();
         }
       }
     }

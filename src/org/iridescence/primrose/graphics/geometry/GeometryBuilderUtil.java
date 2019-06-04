@@ -15,10 +15,10 @@ public class GeometryBuilderUtil {
     float[] positions = new float[] {0, 0, 0.f, width, 0, 0.f, width, height, 0.f, 0, height, 0.f};
     float[] normals =
         new float[] {
-          0, 0, -1,
-          0, 0, -1,
-          0, 0, -1,
-          0, 0, -1
+          0, 0, 1,
+          0, 0, 1,
+          0, 0, 1,
+          0, 0, 1
         };
 
     return new Geometry(positions, uvs, normals, indices);
